@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
+get 'pages/about'
+get 'about', to: 'pages#about'
+get 'credits', to: 'pages#credit'
   resources :transcriptions
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
-
+root 'transcriptions#index'
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 
