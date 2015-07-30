@@ -2,21 +2,49 @@ $base-color: #AD141E;
 $lightgray: #999;
 $black: #000;
 $white: #FFF;
+
 body { padding-top: 100px; font-family: Roboto, sans-serif;}
 footer { margin-top: 100px; }
 table, td, th { vertical-align: middle; border: none; }
 th { border-bottom: 1px solid #DDD; }
+
+$base-color: #AD141E;
+$lighter: lighten($base-color, 20% );
+$darker: darken($base-color, 20% );
+$transparent: rgba($base-color, 0.7 );
+
+/**You can start putting these together in interesting ways to develop complex CSS rules. Let’s make a SCSS rule for a new element we can add to the landing page of the app that uses a mixin (for box shadows), functions to change the color, and remain pretty readable.
+*/
+
+@mixin box-shadow($top, $left, $blur, $size, $color, $inset: false) {
+  @if $inset {
+      -webkit-box-shadow:inset $top $left $blur $size $color;
+      -moz-box-shadow:inset $top $left $blur $size $color;
+      box-shadow:inset $top $left $blur $size $color;
+  } @else {
+      -webkit-box-shadow: $top $left $blur $size $color;
+      -moz-box-shadow: $top $left $blur $size $color;
+      box-shadow: $top $left $blur $size $color;
+  }
+}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -ms-border-radius: $radius;
+  border-radius: $radius;
+}
+
+
+$base-color: #AD141E;
+$white: #FFF;
+
 .intro-box {
   padding: 10px;
-  background: #ad141e;
-  color: #d9d9d9;
-  border: 1px solid #52090e;
-  text-shadow: 0 -1px 0 #7f0f16;
-  -webkit-box-shadow: 0 1px 0 #e93e49 inset;
-  -moz-box-shadow: 0 1px 0 #e93e49 inset;
-  box-shadow: 0 1px 0 #e93e49 inset;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  -ms-border-radius: 10px;
-  border-radius: 10px;
+  background: $base-color;
+  color: darken($white, 15%);
+  border: 1px solid darken($base-color, 20%);
+  text-shadow: 0 -1px 0 darken($base-color, 10%);
+  @include box-shadow(0, 1px, 0, lighten($base-color, 20%), inset);
+  @include border-radius(10px);
 }
